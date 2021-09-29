@@ -17,3 +17,8 @@ EOF
   type    = map(string)
   default = {}
 }
+
+data "ns_connection" "datadog" {
+  name = "datadog"
+  type = "telemetry/datadog/aws"
+}

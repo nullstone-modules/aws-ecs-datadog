@@ -14,7 +14,7 @@ output "log_configurations" {
       secretOptions = jsonencode([
         {
           name : "apikey",
-          valueFrom : local.api_key
+          valueFrom : data.ns_connection.datadog.outputs.api_key_secret_id
         }
       ])
     }
