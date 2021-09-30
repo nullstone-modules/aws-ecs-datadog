@@ -6,7 +6,7 @@ resource "aws_iam_role" "cw_to_kinesis" {
   assume_role_policy = data.aws_iam_policy_document.cw_to_kinesis_assume.json
 }
 
-data "aws_region" "this" {}
+data "aws_region" "current" {}
 
 data "aws_iam_policy_document" "cw_to_kinesis_assume" {
   statement {
@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "cw_to_kinesis_assume" {
 
     principals {
       type        = "Service"
-      identifiers = ["logs.${data.aws_region.this.current}.amazonaws.com"]
+      identifiers = ["logs.${data.aws_region.current.name}.amazonaws.com"]
     }
   }
 }
