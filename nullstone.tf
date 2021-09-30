@@ -22,3 +22,8 @@ data "ns_connection" "datadog" {
   name = "datadog"
   type = "telemetry/datadog/aws"
 }
+
+locals {
+  delivery_stream_arn = data.ns_connection.datadog.outputs.delivery_stream_arn
+  delivery_role_arn   = data.ns_connection.datadog.outputs.delivery_role_arn
+}
