@@ -9,11 +9,19 @@ resource "datadog_logs_custom_pipeline" "service" {
 
   processor {
     string_builder_processor {
-      target             = "service"
+      target             = "block"
       template           = data.ns_workspace.this.block_name
-      name               = "service name"
+      name               = "block name"
       is_enabled         = true
       is_replace_missing = true
+    }
+  }
+
+  processor {
+    service_remapper {
+      sources    = ["block"]
+      is_enabled = true
+      name       = "remap service name"
     }
   }
 }
