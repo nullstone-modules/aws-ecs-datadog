@@ -3,6 +3,9 @@ terraform {
     ns = {
       source = "nullstone-io/ns"
     }
+    datadog = {
+      source = "DataDog/datadog"
+    }
   }
 }
 
@@ -21,4 +24,11 @@ EOF
 data "ns_connection" "datadog" {
   name = "datadog"
   type = "telemetry/datadog/aws"
+}
+
+locals {
+  delivery_stream_arn = data.ns_connection.datadog.outputs.delivery_stream_arn
+  delivery_role_arn   = data.ns_connection.datadog.outputs.delivery_role_arn
+  api_key_secret_id   = data.ns_connection.datadog.outputs.api_key_secret_id
+  app_key_secret_id   = data.ns_connection.datadog.outputs.app_key_secret_id
 }
