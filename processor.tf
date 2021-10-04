@@ -1,3 +1,5 @@
+// The cloudwatch log group name is used as the "service" in datadog
+// This pipeline will set the block name based on this log group, then remap the service name to this block name
 resource "datadog_logs_custom_pipeline" "service" {
   name       = local.resource_name
   is_enabled = true
