@@ -1,0 +1,3 @@
+output "noop" {
+  value = []
+}
