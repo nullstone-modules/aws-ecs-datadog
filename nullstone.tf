@@ -23,7 +23,7 @@ EOF
 
 data "ns_connection" "datadog" {
   name = "datadog"
-  type = "telemetry/datadog/aws"
+  type = "datadog/aws"
 }
 
 locals {
