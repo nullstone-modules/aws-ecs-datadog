@@ -11,14 +11,19 @@ terraform {
 
 data "ns_workspace" "this" {}
 
-variable "app_metadata" {
-  description = <<EOF
-App Metadata is injected from the app on-the-fly.
-This contains information about resources created in the app module that are needed by the capability.
-EOF
+// Generate a random suffix to ensure uniqueness of resources
+resource "random_string" "resource_suffix" {
+  length  = 5
+  lower   = true
+  upper   = false
+  number  = false
+  special = false
+}
 
-  type    = map(string)
-  default = {}
+locals {
+  tags          = data.ns_workspace.this.tags
+  block_name    = data.ns_workspace.this.block_name
+  resource_name = "${data.ns_workspace.this.block_ref}-${random_string.resource_suffix.result}"
 }
 
 data "ns_connection" "datadog" {

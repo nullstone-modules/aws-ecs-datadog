@@ -1,0 +1,12 @@
+org_name: nullstone
+name: aws-ecs-datadog
+friendly_name: Datadog for ECS/Fargate Service
+description: Capability to automatically emit logs/metrics from a fargate service to datadog
+category: capability/telemetry
+type: capability/datadog/aws-ecs
+appCategories:
+    - app/container
+layer: service
+is_public: true
+provider_types:
+    - aws
