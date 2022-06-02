@@ -5,14 +5,14 @@ resource "datadog_logs_custom_pipeline" "service" {
   is_enabled = true
 
   filter {
-    query = "source:${var.app_metadata["log_group_name"]}"
+    query = "source:${local.log_group_name}"
   }
 
 
   processor {
     string_builder_processor {
       target             = "block"
-      template           = data.ns_workspace.this.block_name
+      template           = local.block_name
       name               = "block name"
       is_enabled         = true
       is_replace_missing = true

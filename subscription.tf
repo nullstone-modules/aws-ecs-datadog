@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "cw_to_kinesis" {
 
 resource "aws_cloudwatch_log_subscription_filter" "app" {
   name            = local.resource_name
-  log_group_name  = var.app_metadata["log_group_name"]
+  log_group_name  = local.log_group_name
   filter_pattern  = ""
   destination_arn = local.delivery_stream_arn
   role_arn        = aws_iam_role.cw_to_kinesis.arn
