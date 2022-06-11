@@ -1,6 +1,7 @@
 data "ns_connection" "datadog" {
-  name = "datadog"
-  type = "datadog/aws"
+  name     = "datadog"
+  type     = "datadog/aws"
+  contract = "datastore/aws/datadog"
 }
 
 locals {
