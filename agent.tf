@@ -4,15 +4,15 @@ output "sidecars" {
       name         = "datadog-agent"
       image        = "public.ecr.aws/datadog/agent:latest"
       essential    = true
-      portMappings = [
+      portMappings = jsonencode([
         { protocol = "tcp", containerPort = 8126 },
-      ]
-      environment  = [
+      ])
+      environment  = jsonencode([
         { name = "ECS_FARGATE", value = "true" },
         { name = "DD_APM_ENABLED", value = "true" },
         { name = "DD_SITE", value = "datadoghq.com" }
-      ]
-      secrets = [{ name = "DD_API_KEY", valueFrom = local.api_key_secret_id }]
+      ])
+      secrets = jsonencode([{ name = "DD_API_KEY", valueFrom = local.api_key_secret_id }])
     }
   ]
 }
