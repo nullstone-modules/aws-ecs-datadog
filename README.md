@@ -13,3 +13,9 @@ The application logs are immediately sent to Cloudwatch and transmitted to Datad
 
 The Datadog agent is added to your application as a sidecar container.
 This agent collects metrics from AWS and custom metrics from your application and sends them to Datadog in near real-time.
+
+### OpenTelemetry
+
+The Datadog agent is configured as an OpenTelemetry agent with a gRPC listener on port 4317 and HTTP listener on port 4318.
+This module automatically injects `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable into the app.
+This endpoint refers to the HTTP listener.
