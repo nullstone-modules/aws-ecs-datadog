@@ -4,7 +4,7 @@ data "ns_connection" "datadog" {
 }
 
 locals {
-  delivery_stream_arn = data.ns_connection.datadog.outputs.delivery_stream_arn
+  delivery_stream_arn = data.ns_connection.datadog.outputs.logs_delivery_stream_arn
   delivery_role_arn   = data.ns_connection.datadog.outputs.delivery_role_arn
   datadog_region      = data.ns_connection.datadog.outputs.datadog_region
   api_key_secret_id   = data.ns_connection.datadog.outputs.api_key_secret_id
