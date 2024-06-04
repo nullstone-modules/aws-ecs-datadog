@@ -9,5 +9,6 @@ EOF
 }
 
 locals {
-  log_group_name = var.app_metadata["log_group_name"]
+  log_group_name      = var.app_metadata["log_group_name"]
+  execution_role_name = var.app_metadata["execution_role_name"]
 }
