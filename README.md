@@ -5,9 +5,12 @@ This capability sends application logs and metrics to Datadog for ECS (Fargate-b
 ## Logs
 
 Application logs are configured to send to Datadog in near real-time. (<1 min latency)
-These logs are tagged with `stack`, `block`, and `env`.
+They are immediately sent to Cloudwatch and transmitted to Datadog via Kinesis Firehose.
 
-The application logs are immediately sent to Cloudwatch and transmitted to Datadog via Kinesis Firehose.
+These logs are tagged with `stack`, `block`, and `env`.
+Additionally, this module adds a log pipeline to do the following:
+- Create attribute and tag `container` that represents the container name. (useful to filter out logs from sidecars including the datadog agent)
+- Create attribute and tag `task_id` that represents the ECS task id. (useful for differentiating different tasks)
 
 ## Metrics
 
