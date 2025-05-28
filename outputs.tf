@@ -2,7 +2,7 @@ output "env" {
   value = [
     {
       name  = "OTEL_EXPORTER_OTLP_ENDPOINT"
-      value = "http://localhost:4318"
+      value = local.otlp_endpoint
     }
   ]
 }

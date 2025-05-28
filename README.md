@@ -18,4 +18,5 @@ This agent collects metrics from AWS and custom metrics from your application an
 
 The Datadog agent is configured as an OpenTelemetry agent with a gRPC listener on port 4317 and HTTP listener on port 4318.
 This module automatically injects `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable into the app.
-This endpoint refers to the HTTP listener.
+If you use a standard OpenTelemetry library, it will use this environment variable to connect to the HTTP listener.
+If you enable `var.use_grpc`, this environment variable will refer to the gRPC listener instead.
