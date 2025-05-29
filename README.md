@@ -15,11 +15,20 @@ Additionally, this module adds a log pipeline to do the following:
 ## Metrics
 
 The Datadog agent is added to your application as a sidecar container.
-This agent collects metrics from AWS and custom metrics from your application and sends them to Datadog in near real-time.
+This agent collects metrics from ECS/Fargate and sends them to Datadog in near real-time.
 
-### OpenTelemetry
+The Datadog agent automatically discovers metadata about the service and attributes to the metrics.
+This includes information about the ECS/Fargate task, ECS/Fargate cluster, availability zone, region, and more.
 
-The Datadog agent is configured as an OpenTelemetry agent with a gRPC listener on port 4317 and HTTP listener on port 4318.
-This module automatically injects `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable into the app.
-If you use a standard OpenTelemetry library, it will use this environment variable to connect to the HTTP listener.
-If you enable `var.use_grpc`, this environment variable will refer to the gRPC listener instead.
+### OpenTelemetry (APM, Traces)
+
+For custom metrics and traces, the Datadog agent is configured to run as an OpenTelemetry collector that forwards to Datadog.
+
+The agent is configured to listen on port 4317 (gRPC) and 4318 (HTTP).
+This module automatically injects `OTEL_EXPORTER_OTLP_ENDPOINT` env var into the app.
+If you use a standard OpenTelemetry library, it will use this env var to connect to the listener.
+By default, this is configured to connect to the HTTP listener.
+If you enable `var.use_grpc`, this env var will refer to the gRPC listener instead.
+
+This module automatically configures the OpenTelemetry collector to tag custom metrics/traces with `service.name` and `deployment.environment`.
+If you would like more metadata, you will need to configure your OpenTelemetry configuration to add additional resource attributes.

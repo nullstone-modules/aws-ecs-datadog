@@ -11,8 +11,11 @@ locals {
     ])
     environment = jsonencode([
       { name = "ECS_FARGATE", value = "true" },
+      { name = "DD_FARGATE", value = "true" },
       { name = "DD_APM_ENABLED", value = "true" },
       { name = "DD_SITE", value = "datadoghq.com" },
+      { name = "DD_SERVICE", value = local.block_name },
+      { name = "DD_ENV", value = local.env_name },
       { name = "DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT", value = "0.0.0.0:4317" },
       { name = "DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT", value = "0.0.0.0:4318" }
     ])
